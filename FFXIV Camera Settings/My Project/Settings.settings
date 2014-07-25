@@ -5,9 +5,6 @@
     <Setting Name="FOV" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">0.78</Value>
     </Setting>
-    <Setting Name="ZoomMin" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">1.0</Value>
-    </Setting>
     <Setting Name="ZoomMax" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">50.0</Value>
     </Setting>
