@@ -4,7 +4,7 @@ Imports System.Runtime.InteropServices
 Public Class Main
 
     ' url to the memory address config file
-    Const MEMORY_ADDRESSES_CONFIG_URL = "https://raw.githubusercontent.com/SG57/FFXIV-Camera-Settings/master/Memory-Addresses.config"
+    Const MEMORY_ADDRESSES_CONFIG_URL = "https://raw.githubusercontent.com/SG57/FFXIV-Camera-Settings/master/Memory-Addresses.txt"
 
 
 
