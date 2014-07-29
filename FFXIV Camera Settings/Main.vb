@@ -143,37 +143,38 @@ Public Class Main
         Try
             Dim working_date As String = "7/29/2014"
 
-            Dim config_file As String() = New WebClient().DownloadString(MEMORY_ADDRESSES_CONFIG_URL).Split(New String() {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            Dim config_file = New WebClient().DownloadString(MEMORY_ADDRESSES_CONFIG_URL).Split(New Char() {ChrW(10), ChrW(&HD0A)}, StringSplitOptions.RemoveEmptyEntries)
+
             For Each line In config_file
                 Dim setting() = line.Split(New String() {"="}, 2, StringSplitOptions.None)
-                For Each s In setting
-                    s.Trim()
-                Next
 
-                Select Case setting(0)
-                    Case "workingdate"
+                Select Case setting(0).Trim
+                    Case "WorkingDate"
                         working_date = setting(1)
 
 
-                    Case "cameraaddress"
+                    Case "CameraAddress"
                         Dim camera_offsets() = setting(1).Split(New String() {","}, StringSplitOptions.RemoveEmptyEntries)
 
-                        My.Settings.CameraAddress = New Integer(camera_offsets.Length) {}
+                        Dim new_cam_addr(camera_offsets.Length) As Integer
                         For i As Integer = 0 To camera_offsets.Length
-                            My.Settings.CameraAddress(i) = Convert.ToInt32(camera_offsets(i).Substring(2), 16)
+                            new_cam_addr(i) = CInt("&H" & camera_offsets(i).Substring(2).Trim)
                         Next
 
+                        My.Settings.CameraAddress = new_cam_addr
+                        My.Settings.Save()
 
-                    Case "zoomcurrentoffset"
-                    Case "zoommaxoffset"
-                    Case "fovcurrentoffset"
-                    Case "fovmaxoffset"
+
+                    Case "ZoomCurrentOffset"
+                    Case "ZoomMaxOffset"
+                    Case "FovCurrentOffset"
+                    Case "FovMaxOffset"
 
                 End Select
             Next
 
             If verbose Then
-                MsgBox("Using memory addresses working as of: " & working_date, MsgBoxStyle.Information, "Updated Memory Addresses")
+                MsgBox("Now using memory addresses that were working as of: " & working_date, MsgBoxStyle.Information, "Updated Memory Addresses")
             End If
 
         Catch ex As WebException
