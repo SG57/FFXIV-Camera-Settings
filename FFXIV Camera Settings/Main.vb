@@ -86,6 +86,9 @@ Public Class Main
     End Sub
 
     Private Sub comboProcesses_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles comboProcesses.SelectionChangeCommitted
+        Me.groupZoom.Visible = False
+        Me.groupFov.Visible = False
+
         If IsNothing(Me.comboProcesses.SelectedItem) Then Return
 
         If Not _memory.AttachToProcess(Me.comboProcesses.SelectedItem) Then
@@ -143,7 +146,7 @@ Public Class Main
         Try
             Dim working_date As String = "7/29/2014"
 
-            Dim config_file = New WebClient().DownloadString(MEMORY_ADDRESSES_CONFIG_URL).Split(New Char() {ChrW(10), ChrW(&HD0A)}, StringSplitOptions.RemoveEmptyEntries)
+            Dim config_file = New WebClient().DownloadString(MEMORY_ADDRESSES_CONFIG_URL).Split(New Char() {ChrW(10), ChrW(&HD0A), vbCrLf}, StringSplitOptions.RemoveEmptyEntries)
 
             For Each line In config_file
                 Dim setting() = line.Split(New String() {"="}, 2, StringSplitOptions.None)
@@ -156,25 +159,32 @@ Public Class Main
                     Case "CameraAddress"
                         Dim camera_offsets() = setting(1).Split(New String() {","}, StringSplitOptions.RemoveEmptyEntries)
 
-                        Dim new_cam_addr(camera_offsets.Length) As Integer
-                        For i As Integer = 0 To camera_offsets.Length
-                            new_cam_addr(i) = CInt("&H" & camera_offsets(i).Substring(2).Trim)
+                        My.Settings.CameraAddress = New Integer(camera_offsets.Length - 1) {}
+
+                        For i As Integer = 0 To camera_offsets.Length - 1
+                            My.Settings.CameraAddress(i) = Convert.ToInt32(camera_offsets(i).Trim().Substring(2), 16)
                         Next
 
-                        My.Settings.CameraAddress = new_cam_addr
-                        My.Settings.Save()
 
 
                     Case "ZoomCurrentOffset"
-                    Case "ZoomMaxOffset"
-                    Case "FovCurrentOffset"
-                    Case "FovMaxOffset"
+                        My.Settings.ZoomCurrentOffset = Convert.ToInt32(setting(1).Trim().Substring(2), 16)
 
+                    Case "ZoomMaxOffset"
+                        My.Settings.ZoomMaxOffset = Convert.ToInt32(setting(1).Trim().Substring(2), 16)
+
+                    Case "FovCurrentOffset"
+                        My.Settings.FovCurrentOffset = Convert.ToInt32(setting(1).Trim().Substring(2), 16)
+
+                    Case "FovMaxOffset"
+                        My.Settings.FovMaxOffset = Convert.ToInt32(setting(1).Trim().Substring(2), 16)
                 End Select
             Next
 
+            My.Settings.Save()
+
             If verbose Then
-                MsgBox("Now using memory addresses that were working as of: " & working_date, MsgBoxStyle.Information, "Updated Memory Addresses")
+                MsgBox("Successfully updated to the memory addresses that were working as of: " & vbCrLf & vbCrLf & working_date, MsgBoxStyle.Information, "Updated Memory Addresses")
             End If
 
         Catch ex As WebException
@@ -186,5 +196,18 @@ Public Class Main
                        "Make sure you have an internet connection and try again.", MsgBoxStyle.Critical, "Connection Timed Out")
             End If
         End Try
+    End Sub
+
+
+
+
+
+
+    Private Sub btnZoomMaxDefault_Click(sender As Object, e As EventArgs) Handles btnZoomMaxDefault.Click
+        Me.sliderZoomMax.Value = 20 * 100 ' max zoom default
+    End Sub
+
+    Private Sub btnFovDefault_Click(sender As Object, e As EventArgs) Handles btnFovDefault.Click
+        Me.sliderFov.Value = 0.78 * 100 ' fov default
     End Sub
 End Class
