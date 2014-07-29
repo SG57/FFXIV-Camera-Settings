@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -75,6 +75,80 @@ Namespace My
             End Get
             Set
                 Me("ZoomMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property SetZoomCurrent() As Boolean
+            Get
+                Return CType(Me("SetZoomCurrent"),Boolean)
+            End Get
+            Set
+                Me("SetZoomCurrent") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("<?xml version=""1.0"" encoding=""utf-16""?>" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "<ArrayOfInt xmlns:xsi=""http://www.w3.org" & _
+            "/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "  <int>" & _
+            "15837456</int>" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "</ArrayOfInt>")> _
+        Public Property CameraAddress() As Integer()
+            Get
+                Return CType(Me("CameraAddress"), Integer())
+            End Get
+            Set(value As Integer())
+                Me("CameraAddress") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("232")> _
+        Public Property ZoomCurrentOffset() As Integer
+            Get
+                Return CType(Me("ZoomCurrentOffset"), Integer)
+            End Get
+            Set(value As Integer)
+                Me("ZoomCurrentOffset") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("240")> _
+        Public Property ZoomMaxOffset() As Integer
+            Get
+                Return CType(Me("ZoomMaxOffset"), Integer)
+            End Get
+            Set(value As Integer)
+                Me("ZoomMaxOffset") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("244")> _
+        Public Property FovCurrentOffset() As Integer
+            Get
+                Return CType(Me("FovCurrentOffset"), Integer)
+            End Get
+            Set(value As Integer)
+                Me("FovCurrentOffset") = value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("252")> _
+        Public Property FovMaxOffset() As Integer
+            Get
+                Return CType(Me("FovMaxOffset"), Integer)
+            End Get
+            Set(value As Integer)
+                Me("FovMaxOffset") = value
             End Set
         End Property
     End Class

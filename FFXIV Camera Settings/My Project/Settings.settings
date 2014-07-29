@@ -8,5 +8,26 @@
     <Setting Name="ZoomMax" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">50.0</Value>
     </Setting>
+    <Setting Name="SetZoomCurrent" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CameraAddress" Type="System.Int32[]" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfInt xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;int&gt;15837456&lt;/int&gt;
+&lt;/ArrayOfInt&gt;</Value>
+    </Setting>
+    <Setting Name="ZoomCurrentOffset" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">232</Value>
+    </Setting>
+    <Setting Name="ZoomMaxOffset" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">240</Value>
+    </Setting>
+    <Setting Name="FovCurrentOffset" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">244</Value>
+    </Setting>
+    <Setting Name="FovMaxOffset" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">252</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
