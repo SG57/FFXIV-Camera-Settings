@@ -6,7 +6,7 @@ A simple program that allows you to change the camera settings in FFXIV.
 
 
 More details:
-http://www.reddit.com/r/ffxiv/comments/1n8hv6/new_addon_percenthealth_overlay/
+http://www.reddit.com/r/ffxiv/comments/2c2if9/app_ffxiv_camera_settings_adjust_zoom_fov/
 
 
 
