@@ -28,8 +28,6 @@ Public Class Main
 
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        UpdateMemoryAddresses(False)
-
         Me.sliderZoomMax.Value = My.Settings.ZoomMax * 100
         Me.sliderFov.Value = My.Settings.FOV * 100
         Me.checkSetZoom.Checked = My.Settings.SetZoomCurrent
@@ -107,7 +105,7 @@ Public Class Main
 
 
 
-    Private Sub TrackBar1_ValueChanged(sender As Object, e As EventArgs) Handles sliderFov.ValueChanged
+    Private Sub fov_ValueChanged(sender As Object, e As EventArgs) Handles sliderFov.ValueChanged
         If _shouldSaveSettings Then
             My.Settings.FOV = Me.sliderFov.Value / 100.0
             My.Settings.Save()
@@ -117,7 +115,7 @@ Public Class Main
         _memory.WriteFov(Me.sliderFov.Value / 100.0)
     End Sub
 
-    Private Sub TrackBar2_ValueChanged(sender As Object, e As EventArgs) Handles sliderZoomMax.ValueChanged
+    Private Sub zoomMax_ValueChanged(sender As Object, e As EventArgs) Handles sliderZoomMax.ValueChanged
         If _shouldSaveSettings Then
             My.Settings.ZoomMax = Me.sliderZoomMax.Value / 100.0
             My.Settings.Save()
@@ -139,10 +137,10 @@ Public Class Main
 
 
     Private Sub CheckForUpdateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CheckForUpdateToolStripMenuItem.Click
-        UpdateMemoryAddresses(True)
+        UpdateMemoryAddresses()
     End Sub
 
-    Private Sub UpdateMemoryAddresses(ByVal verbose As Boolean)
+    Private Sub UpdateMemoryAddresses()
         Try
             Dim working_date As String = "7/29/2014"
 
@@ -166,7 +164,6 @@ Public Class Main
                         Next
 
 
-
                     Case "ZoomCurrentOffset"
                         My.Settings.ZoomCurrentOffset = Convert.ToInt32(setting(1).Trim().Substring(2), 16)
 
@@ -183,18 +180,21 @@ Public Class Main
 
             My.Settings.Save()
 
-            If verbose Then
-                MsgBox("Successfully updated to the memory addresses that were working as of: " & vbCrLf & vbCrLf & working_date, MsgBoxStyle.Information, "Updated Memory Addresses")
-            End If
+            ' recalc addresses using the newly updated ones stored in settings
+            _memory.CalculateAddresses()
+            
+            _memory.WriteFov(Me.sliderFov.Value / 100.0)
+            _memory.WriteZoomMax(Me.sliderZoomMax.Value / 100.0)
+
+            MsgBox("Successfully updated to the memory addresses that were working as of: " & vbCrLf & vbCrLf & working_date, MsgBoxStyle.Information, "Updated Memory Addresses")
+
 
         Catch ex As WebException
-            If verbose Then
-                MsgBox("Timed out attempting to reach the update server:" &
+            MsgBox("Timed out attempting to reach the update server:" &
                        vbCrLf & vbCrLf &
                        MEMORY_ADDRESSES_CONFIG_URL &
                        vbCrLf & vbCrLf &
                        "Make sure you have an internet connection and try again.", MsgBoxStyle.Critical, "Connection Timed Out")
-            End If
         End Try
     End Sub
 

@@ -6,12 +6,14 @@
     Private FovCurrentAddress As Int32
     Private FovMaxAddress As Int32
 
-    Private Sub CalculateAddresses()
-        ZoomCurrentAddress = CalculateAddress(My.Settings.CameraAddress, My.Settings.ZoomCurrentOffset)
-        ZoomMaxAddress = CalculateAddress(My.Settings.CameraAddress, My.Settings.ZoomMaxOffset)
+    Public Sub CalculateAddresses()
+        If IsAttached() Then
+            ZoomCurrentAddress = CalculateAddress(My.Settings.CameraAddress, My.Settings.ZoomCurrentOffset)
+            ZoomMaxAddress = CalculateAddress(My.Settings.CameraAddress, My.Settings.ZoomMaxOffset)
 
-        FovCurrentAddress = CalculateAddress(My.Settings.CameraAddress, My.Settings.FovCurrentOffset)
-        FovMaxAddress = CalculateAddress(My.Settings.CameraAddress, My.Settings.FovMaxOffset)
+            FovCurrentAddress = CalculateAddress(My.Settings.CameraAddress, My.Settings.FovCurrentOffset)
+            FovMaxAddress = CalculateAddress(My.Settings.CameraAddress, My.Settings.FovMaxOffset)
+        End If
     End Sub
 
     Private Function CalculateAddress(ByVal addr_ptrs() As Int32, ByVal final_offset As Int32) As Int32
