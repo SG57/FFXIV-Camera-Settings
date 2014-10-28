@@ -1,7 +1,7 @@
 WorkingDate = 10/1/2014
 
 
-CameraAddress = 0xEE7A90
+CameraAddress = 0xF180E0
 
 ZoomCurrentOffset = 0xE8
 ZoomMaxOffset = 0xF0
