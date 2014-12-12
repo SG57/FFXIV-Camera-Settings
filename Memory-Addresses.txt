@@ -1,7 +1,7 @@
-WorkingDate = 10/1/2014
+WorkingDate = 12/11/2014 - Patch 2.45 (2) - Happy Holidays All! <3
 
 
-CameraAddress = 0xF1AC08
+CameraAddress = 0xF190E0
 
 ZoomCurrentOffset = 0xE8
 ZoomMaxOffset = 0xF0
