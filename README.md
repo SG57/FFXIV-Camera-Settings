@@ -14,4 +14,4 @@ http://www.reddit.com/r/ffxiv/comments/2c2if9/app_ffxiv_camera_settings_adjust_z
 Creator:
   Cord Rehn - <jordansg57@gmail.com>
 
-(C) 2014
+(C) 2014 - 2015
