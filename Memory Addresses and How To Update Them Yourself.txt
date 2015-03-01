@@ -1,0 +1,27 @@
+=====================================================================================================
+========  Here are some notes around updating the memory addresses for this app yourself!  ==========
+=====================================================================================================
+
+I assume you have CheatEngine, and you are not completely new to the tool.
+
+The only thing that will requires updating each patch (typically) is only the offset to the Camera address.
+We can find the Camera offset by locating your current zoom level, finding what accesses that address.
+
+Process Overview:
+  1.) Zoom your camera out to max level without something obstructing it.
+  2.) New scan for an exact FLOAT value of 20.0 (current default max)
+  3.) Go in-game and zoom in the closest you can WITHOUT going first-person.
+  4.) Do a next scan for an exact FLOAT value of 1.5 (current default min)
+  5.) Repeat steps 2 - 4 as needed until you are left an address that, when scrolling in and out in-game, goes down and up respectively between the values 1.5 and 20.0
+  6.) Once you have the 'current zoom' address, find what accesses that address and you should find a static pointer (green address).
+  7.) The NEW camera offset that you will Update the Memory-Addresses.txt file with will be the value in that static pointer's address: [ffxiv.exe+{value}]
+  8.) To update the memory address for all to us, go to this github project, click the 'Memory-Addresses.txt' file on the root of the project, and click the 'edit' pencil icon in the top right.
+     There,  modify the CameraAddress line to the NEW address as found through the process above.
+     You should also modify the 'last confirmed working date' to the day's date (plus any other information on that same line is supported)
+  9.) Commit and save the changes to the file.  Immediately after, create a "PULL REQUEST" on the next page and it will alert me to merge your fix. 
+      If you are confident your memory fix works, I will merge them. If any of you reading this are Github savvy and wish to take over moderating pull requests, let me know.
+  
+If you absolutely WANT this app to be working, and absolutely CAN NOT do this, email me and I'll step you through the process in 10 minutes.
+  
+Cheers all,
+SG57
