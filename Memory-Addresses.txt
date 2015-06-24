@@ -1,7 +1,7 @@
-WorkingDate = 2/28/2015 - Patch 2.51
+WorkingDate = 2015-06-23 - Patch 3.00
 
 
-CameraAddress = 0xFADC00
+CameraAddress = 0xECB8D0
 
 ZoomCurrentOffset = 0xE8
 ZoomMaxOffset = 0xF0
